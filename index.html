@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundMini – Clone do SoundCloud</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+  <!-- HEADER -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-xl font-bold">SoundMini</h1>
+
+      <input id="search" placeholder="Buscar músicas..." class="border px-3 py-2 rounded w-64" />
+
+      <button class="bg-indigo-600 text-white px-3 py-2 rounded">Upload</button>
+    </div>
+  </header>
+
+
+  <!-- FEED -->
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-6 space-y-4" id="track-list">
+    <!-- As faixas serão carregadas via JS -->
+  </main>
+
+
+  <!-- PLAYER FIXO EMBAIXO -->
+  <footer class="fixed bottom-0 left-0 right-0 bg-white border-t shadow">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4">
+
+      <!-- Cover + info -->
+      <div id="player-info" class="flex items-center gap-3 w-64">
+        <span class="text-gray-500 text-sm">Nenhuma faixa selecionada</span>
+      </div>
+
+      <!-- Barra de progresso -->
+      <div class="flex-1">
+        <div class="bg-gray-200 h-2 rounded overflow-hidden">
+          <div id="progress-bar" class="bg-indigo-600 h-2 w-0"></div>
+        </div>
+      </div>
+
+      <!-- Botão play/pause -->
+      <button id="play-btn" class="px-4 py-2 bg-gray-200 rounded">Tocar</button>
+
+      <audio id="audio"></audio>
+    </div>
+  </footer>
+
+
+  <!-- SCRIPT PRINCIPAL -->
+  <script>
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("play-btn");
+    const trackList = document.getElementById("track-list");
+    const playerInfo = document.getElementById("player-info");
+    const progressBar = document.getElementById("progress-bar");
+
+    let currentTrack = null;
+
+    const tracks = [
+      {
+        id: 1,
+        title: "Morning Drive",
+        artist: "DJ Sol",
+        cover: "https://picsum.photos/seed/1/200",
+        src: "sample1.mp3"
+      },
+      {
+        id: 2,
+        title: "Late Night",
+        artist: "Ana Maria",
+        cover: "https://picsum.photos/seed/2/200",
+        src: "sample2.mp3"
+      },
+      {
+        id: 3,
+        title: "Upbeat Pop",
+        artist: "The Waves",
+        cover: "https://picsum.photos/seed/3/200",
+        src: "sample3.mp3"
+      }
+    ];
+
+    function renderTracks() {
+      trackList.innerHTML = tracks.map(t => `
+        <div class="bg-white p-4 rounded shadow flex items-center gap-4">
+          <img src="${t.cover}" class="w-16 h-16 rounded object-cover" />
+
+          <div class="flex-1">
+            <h3 class="font-semibold">${t.title}</h3>
+            <p class="text-sm text-gray-500">${t.artist}</p>
+          </div>
+
+          <button onclick="playTrack(${t.id})" class="bg-indigo-600 text-white px-3 py-2 rounded">
+            Tocar
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function playTrack(id) {
+      const track = tracks.find(t => t.id === id);
+      if (!track) return;
+      currentTrack = track;
+
+      audio.src = track.src;
+      audio.play();
+      playBtn.textContent = "Pausar";
+
+      playerInfo.innerHTML = `
+        <img src="${track.cover}" class="w-12 h-12 rounded object-cover" />
+        <div>
+          <p class="font-medium text-sm">${track.title}</p>
+          <p class="text-xs text-gray-500">${track.artist}</p>
+        </div>
+      `;
+    }
+
+    playBtn.onclick = () => {
+      if (!audio.src) return;
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "Pausar";
+      } else {
+        audio.pause();
+        playBtn.textContent = "Tocar";
+      }
+    };
+
+    audio.ontimeupdate = () => {
+      if (!audio.duration) return;
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = percent + "%";
+    };
+
+    renderTracks();
+  </script>
+</body>
+</html>
