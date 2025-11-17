@@ -20,12 +20,10 @@
     </div>
   </header>
 
-
   <!-- FEED -->
   <main class="flex-1 max-w-5xl mx-auto px-4 py-6 space-y-4" id="track-list">
     <!-- As faixas serão carregadas via JS -->
   </main>
-
 
   <!-- PLAYER FIXO EMBAIXO -->
   <footer class="fixed bottom-0 left-0 right-0 bg-white border-t shadow">
@@ -49,7 +47,6 @@
       <audio id="audio"></audio>
     </div>
   </footer>
-
 
   <!-- SCRIPT PRINCIPAL -->
   <script>
@@ -138,6 +135,18 @@
     };
 
     renderTracks();
+
+    // --- BUSCAR MÚSICAS EM OUTRA ABA ---
+    const searchInput = document.getElementById("search");
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const q = searchInput.value.trim();
+        if (q.length > 0) {
+          window.open(`search.html?q=${encodeURIComponent(q)}`, "_blank");
+        }
+      }
+    });
   </script>
 </body>
 </html>
