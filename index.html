@@ -141,14 +141,3 @@
   </script>
 </body>
 </html>
-
-const searchInput = document.getElementById("search");
-
-searchInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    const q = searchInput.value.trim();
-    if (q.length > 0) {
-      window.open(`search.html?q=${encodeURIComponent(q)}`, "_blank");
-    }
-  }
-});
