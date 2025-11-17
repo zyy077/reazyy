@@ -226,3 +226,181 @@
   </div>
 </body>
 </html>
+<!-- PAGE 1 -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundMini – Página 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-4">Página 1 – Escolha de Músicas</h1>
+
+  <div class="grid grid-cols-1 gap-4" id="music-list-1">
+    <!-- músicas -->
+  </div>
+
+  <script>
+    const musics1 = Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      title: `Música ${i + 1}`,
+      artist: `Artista ${i + 1}`,
+      cover: `https://picsum.photos/seed/pag1_${i}/200`,
+      src: "sample.mp3"
+    }));
+
+    document.getElementById("music-list-1").innerHTML = musics1.map(m => `
+      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
+        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
+        <div class='flex-1'>
+          <h3 class='font-semibold'>${m.title}</h3>
+          <p class='text-sm text-gray-500'>${m.artist}</p>
+        </div>
+        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>
+
+
+<!-- PAGE 2 -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundMini – Página 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-4">Página 2 – Escolha de Músicas</h1>
+
+  <div class="grid grid-cols-1 gap-4" id="music-list-2"></div>
+
+  <script>
+    const musics2 = Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      title: `Música ${i + 1}`,
+      artist: `Artista ${i + 1}`,
+      cover: `https://picsum.photos/seed/pag2_${i}/200`,
+      src: "sample.mp3"
+    }));
+
+    document.getElementById("music-list-2").innerHTML = musics2.map(m => `
+      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
+        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
+        <div class='flex-1'>
+          <h3 class='font-semibold'>${m.title}</h3>
+          <p class='text-sm text-gray-500'>${m.artist}</p>
+        </div>
+        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>
+
+
+<!-- PAGE 3 -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundMini – Página 3</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-4">Página 3 – Escolha de Músicas</h1>
+
+  <div class="grid grid-cols-1 gap-4" id="music-list-3"></div>
+
+  <script>
+    const musics3 = Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      title: `Música ${i + 1}`,
+      artist: `Artista ${i + 1}`,
+      cover: `https://picsum.photos/seed/pag3_${i}/200`,
+      src: "sample.mp3"
+    }));
+
+    document.getElementById("music-list-3").innerHTML = musics3.map(m => `
+      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
+        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
+        <div class='flex-1'>
+          <h3 class='font-semibold'>${m.title}</h3>
+          <p class='text-sm text-gray-500'>${m.artist}</p>
+        </div>
+        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>
+
+
+<!-- PAGE 4 -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundMini – Página 4</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-4">Página 4 – Escolha de Músicas</h1>
+
+  <div class="grid grid-cols-1 gap-4" id="music-list-4"></div>
+
+  <script>
+    const musics4 = Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      title: `Música ${i + 1}`,
+      artist: `Artista ${i + 1}`,
+      cover: `https://picsum.photos/seed/pag4_${i}/200`,
+      src: "sample.mp3"
+    }));
+
+    document.getElementById("music-list-4").innerHTML = musics4.map(m => `
+      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
+        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
+        <div class='flex-1'>
+          <h3 class='font-semibold'>${m.title}</h3>
+          <p class='text-sm text-gray-500'>${m.artist}</p>
+        </div>
+        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>
+
+
+<!-- PAGE 5 -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundMini – Página 5</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-4">Página 5 – Escolha de Músicas</h1>
+
+  <div class="grid grid-cols-1 gap-4" id="music-list-5"></div>
+
+  <script>
+    const musics5 = Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      title: `Música ${i + 1}`,
+      artist: `Artista ${i + 1}`,
+      cover: `https://picsum.photos/seed/pag5_${i}/200`,
+      src: "sample.mp3"
+    }));
+
+    document.getElementById("music-list-5").innerHTML = musics5.map
