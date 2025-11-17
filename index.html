@@ -13,7 +13,8 @@
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <h1 class="text-xl font-bold">SoundMini</h1>
 
-      <input id="search" placeholder="Buscar músicas..." class="border px-3 py-2 rounded w-64" />
+      <input id="search" placeholder="Buscar músicas..." 
+             class="border px-3 py-2 rounded w-64" />
 
       <button class="bg-indigo-600 text-white px-3 py-2 rounded">Upload</button>
     </div>
@@ -31,13 +32,10 @@
   <!-- PAGINAS -->
   <section class="pb-36">
     <div class="flex justify-center gap-2">
-      <button onclick="goPage(1)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">1</button>
-      <button onclick="goPage(2)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">2</button>
-      <button onclick="goPage(3)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">3</button>
-      <button onclick="goPage(4)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">4</button>
-      <button onclick="goPage(5)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">5</button>
-      <button onclick="goPage(6)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">6</button>
-      <button onclick="goPage(7)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">7</button>
+      ${[1,2,3,4,5,6,7].map(n => `
+        <button onclick="goPage(${n})" 
+          class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">${n}</button>
+      `).join("")}
     </div>
   </section>
 
@@ -71,10 +69,11 @@
     const playerInfo = document.getElementById("player-info");
     const progressBar = document.getElementById("progress-bar");
     const cardList = document.getElementById("card-list");
+
     let currentTrack = null;
     let currentPage = 1;
 
-    // 🔥 7 primeiras músicas com title = mentaliizi - RIT7MIZYY e artist = mentaliizi
+    // 🔥 7 primeiras músicas especiais
     const allTracks = Array.from({ length: 70 }).map((_, i) => ({
       id: i + 1,
       title: i < 7 ? "mentaliizi - RIT7MIZYY" : `Música ${i + 1}`,
@@ -88,20 +87,27 @@
       currentPage = num;
       const start = (num - 1) * 10;
       const end = num * 10;
+
       const items = allTracks.slice(start, end);
 
-      cardList.innerHTML = items.map(m => `
-        <div onclick="playTrack(${m.id})" class="bg-white p-4 rounded shadow hover:shadow-lg cursor-pointer transition overflow-hidden">
+      cardList.innerHTML = items
+        .map(m => `
+        <div onclick="playTrack(${m.id})" 
+          class="bg-white p-4 rounded shadow hover:shadow-lg cursor-pointer transition overflow-hidden">
+          
           <img src="${m.cover}" class="w-full h-40 object-cover rounded mb-3" />
+
           <h3 class="font-semibold text-lg">${m.title}</h3>
           <p class="text-sm text-gray-500">${m.artist}</p>
         </div>
       `).join("");
     }
 
+
     function goPage(num) {
       renderPage(num);
     }
+
 
     function playTrack(id) {
       const track = allTracks.find(t => t.id === id);
@@ -121,8 +127,10 @@
       `;
     }
 
+
     playBtn.onclick = () => {
       if (!audio.src) return;
+
       if (audio.paused) {
         audio.play();
         playBtn.textContent = "Pausar";
@@ -132,19 +140,25 @@
       }
     };
 
+
     audio.ontimeupdate = () => {
       if (!audio.duration) return;
-      progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+
+      progressBar.style.width =
+        (audio.currentTime / audio.duration) * 100 + "%";
     };
 
-    // 🔍 Buscar em nova aba
+
+    // 🔍 Buscar música
     document.getElementById("search").addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         const q = e.target.value.trim();
-        if (q.length > 0) window.open(`search.html?q=${encodeURIComponent(q)}`, "_blank");
+        if (q.length > 0)
+          window.open(`search.html?q=${encodeURIComponent(q)}`, "_blank");
       }
     });
 
+    // Renderiza a página 1
     renderPage(1);
   </script>
 
