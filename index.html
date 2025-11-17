@@ -107,10 +107,20 @@
       { id: 3, title: "Upbeat Pop", artist: "The Waves", cover: "https://picsum.photos/seed/3/200", src: "sample3.mp3" }
     ];
 
-    function renderTracks() {
-      trackList.innerHTML = tracks.map(t => `
+    function renderTracks(filter = "") {
+      const lower = filter.toLowerCase();
+      const filtered = tracks.filter(t => t.title.toLowerCase().includes(lower) || t.artist.toLowerCase().includes(lower));
+      trackList.innerHTML = filtered.map(t => `
         <div class="bg-white p-4 rounded shadow flex items-center gap-4">
           <img src="${t.cover}" class="w-16 h-16 rounded object-cover" />
+          <div class="flex-1">
+            <h3 class="font-semibold">${t.title}</h3>
+            <p class="text-sm text-gray-500">${t.artist}</p>
+          </div>
+          <button onclick="playTrack(${t.id})" class="bg-indigo-600 text-white px-3 py-2 rounded">Tocar</button>
+        </div>
+      `).join(" ");
+    }" class="w-16 h-16 rounded object-cover" />
           <div class="flex-1">
             <h3 class="font-semibold">${t.title}</h3>
             <p class="text-sm text-gray-500">${t.artist}</p>
@@ -173,6 +183,11 @@
       };
     });
 
+
+    // --- PESQUISA ---
+    document.getElementById("search").addEventListener("input", e => {
+      renderTracks(e.target.value);
+    });
 
     // Carregar conteúdo inicial
     renderTracks();
