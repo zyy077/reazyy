@@ -3,95 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Loja & Player</title>
+  <title>SoundMini – Clone do SoundCloud</title>
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+  <!-- HEADER -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-xl font-bold">SoundMini</h1>
 
-  <!-- NAVBAR -->
-  <header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-indigo-600">SoundMini</h1>
+      <input id="search" placeholder="Buscar músicas..." class="border px-3 py-2 rounded w-64" />
 
-      <nav class="flex gap-6 text-sm font-medium">
-        <button class="tab-btn" data-tab="home">Home</button>
-        <button class="tab-btn" data-tab="shop">Compras</button>
-        <button class="tab-btn" data-tab="settings">Configurações</button>
-      </nav>
-
-      <input id="search" placeholder="Buscar músicas..." class="border px-3 py-2 rounded w-56" />
+      <button class="bg-indigo-600 text-white px-3 py-2 rounded">Upload</button>
     </div>
   </header>
 
-  <!-- CONTEÚDOS DAS ABAS -->
-  <main class="flex-1 max-w-6xl mx-auto px-4 py-6">
 
-    <!-- HOME / PLAYER -->
-    <section id="tab-home" class="tab active space-y-4">
-      <h2 class="text-xl font-semibold mb-2">Músicas</h2>
-      <div id="track-list" class="space-y-4"></div>
-    </section>
-
-
-    <!-- ABA LOJA -->
-    <section id="tab-shop" class="tab hidden space-y-6">
-      <h2 class="text-xl font-semibold">Loja</h2>
-      <p class="text-gray-600">Compre capas, efeitos, packs de samples e muito mais.</p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-items">
-        <!-- Items da loja gerados via JS -->
-      </div>
-    </section>
-
-
-    <!-- ABA CONFIGURAÇÕES -->
-    <section id="tab-settings" class="tab hidden space-y-6 max-w-lg">
-      <h2 class="text-xl font-semibold mb-2">Configurações</h2>
-
-      <div class="bg-white p-4 rounded shadow space-y-4">
-        <div>
-          <label class="font-medium">Tema</label>
-          <select id="themeSelect" class="border px-3 py-2 rounded w-full mt-1">
-            <option value="light">Claro</option>
-            <option value="dark">Escuro</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="font-medium">Notificações</label>
-          <label class="flex items-center gap-2 mt-1">
-            <input type="checkbox" id="notifToggle" />
-            Ativar notificações
-          </label>
-        </div>
-
-        <button id="saveSettings" class="bg-indigo-600 text-white w-full py-2 rounded">Salvar</button>
-      </div>
-    </section>
+  <!-- FEED -->
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-6 space-y-4" id="track-list">
+    <!-- As faixas serão carregadas via JS -->
   </main>
 
 
-
-  <!-- PLAYER FIXO -->
+  <!-- PLAYER FIXO EMBAIXO -->
   <footer class="fixed bottom-0 left-0 right-0 bg-white border-t shadow">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4">
 
+      <!-- Cover + info -->
       <div id="player-info" class="flex items-center gap-3 w-64">
         <span class="text-gray-500 text-sm">Nenhuma faixa selecionada</span>
       </div>
 
+      <!-- Barra de progresso -->
       <div class="flex-1">
         <div class="bg-gray-200 h-2 rounded overflow-hidden">
           <div id="progress-bar" class="bg-indigo-600 h-2 w-0"></div>
         </div>
       </div>
 
+      <!-- Botão play/pause -->
       <button id="play-btn" class="px-4 py-2 bg-gray-200 rounded">Tocar</button>
+
       <audio id="audio"></audio>
     </div>
   </footer>
 
 
+  <!-- SCRIPT PRINCIPAL -->
   <script>
     const audio = document.getElementById("audio");
     const playBtn = document.getElementById("play-btn");
@@ -102,96 +62,83 @@
     let currentTrack = null;
 
     const tracks = [
-      { id: 1, title: "Soy Minero", artist: "ZYY77", cover: "https://picsum.photos/seed/1/200", src: "sample1.mp3" },
-      { id: 2, title: "KiNg", artist: "ZYY77", cover: "https://picsum.photos/seed/2/200", src: "sample2.mp3" },
-      { id: 3, title: "RIT7MIZYY", artist: "ZYY77", cover: "https://picsum.photos/seed/3/200", src: "sample3.mp3" },
-      { id: 4, title: "RIT7MIZII", artist: "ZYY77", cover: "https://picsum.photos/seed/4/200", src: "sample4.mp3" }
+      {
+        id: 1,
+        title: "Morning Drive",
+        artist: "DJ Sol",
+        cover: "https://picsum.photos/seed/1/200",
+        src: "sample1.mp3"
+      },
+      {
+        id: 2,
+        title: "Late Night",
+        artist: "Ana Maria",
+        cover: "https://picsum.photos/seed/2/200",
+        src: "sample2.mp3"
+      },
+      {
+        id: 3,
+        title: "Upbeat Pop",
+        artist: "The Waves",
+        cover: "https://picsum.photos/seed/3/200",
+        src: "sample3.mp3"
+      }
     ];
 
-    function renderTracks(filter = "") {
-      const lower = filter.toLowerCase();
-      const filtered = tracks.filter(t => t.title.toLowerCase().includes(lower) || t.artist.toLowerCase().includes(lower));
-      trackList.innerHTML = filtered.map(t => `
+    function renderTracks() {
+      trackList.innerHTML = tracks.map(t => `
         <div class="bg-white p-4 rounded shadow flex items-center gap-4">
           <img src="${t.cover}" class="w-16 h-16 rounded object-cover" />
+
           <div class="flex-1">
             <h3 class="font-semibold">${t.title}</h3>
             <p class="text-sm text-gray-500">${t.artist}</p>
           </div>
-          <button onclick="playTrack(${t.id})" class="bg-indigo-600 text-white px-3 py-2 rounded">Tocar</button>
+
+          <button onclick="playTrack(${t.id})" class="bg-indigo-600 text-white px-3 py-2 rounded">
+            Tocar
+          </button>
         </div>
-      `).join(" ");
-    }" class="w-16 h-16 rounded object-cover" />
-          <div class="flex-1">
-            <h3 class="font-semibold">${t.title}</h3>
-            <p class="text-sm text-gray-500">${t.artist}</p>
-          </div>
-          <button onclick="playTrack(${t.id})" class="bg-indigo-600 text-white px-3 py-2 rounded">Tocar</button>
-        </div>
-      `).join(" ");
+      `).join("");
     }
 
     function playTrack(id) {
       const track = tracks.find(t => t.id === id);
       if (!track) return;
       currentTrack = track;
+
       audio.src = track.src;
       audio.play();
       playBtn.textContent = "Pausar";
+
       playerInfo.innerHTML = `
-        <img src="${track.cover}" class="w-12 h-12 rounded" />
+        <img src="${track.cover}" class="w-12 h-12 rounded object-cover" />
         <div>
           <p class="font-medium text-sm">${track.title}</p>
           <p class="text-xs text-gray-500">${track.artist}</p>
-        </div>`;
+        </div>
+      `;
     }
 
     playBtn.onclick = () => {
       if (!audio.src) return;
-      if (audio.paused) { audio.play(); playBtn.textContent = "Pausar"; }
-      else { audio.pause(); playBtn.textContent = "Tocar"; }
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "Pausar";
+      } else {
+        audio.pause();
+        playBtn.textContent = "Tocar";
+      }
     };
 
     audio.ontimeupdate = () => {
       if (!audio.duration) return;
-      progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = percent + "%";
     };
 
-
-    // -------- ABA LOJA --------
-    const shopItems = [
-      { name: "Capa Premium", price: "R$ 9,90", img: "https://picsum.photos/seed/shop1/300" },
-      { name: "Pack de Samples Trap", price: "R$ 19,90", img: "https://picsum.photos/seed/shop2/300" },
-      { name: "Efeito Vocal", price: "R$ 7,90", img: "https://picsum.photos/seed/shop3/300" }
-    ];
-
-    document.getElementById("shop-items").innerHTML = shopItems.map(i => `
-      <div class="bg-white p-4 rounded shadow">
-        <img src="${i.img}" class="w-full h-40 object-cover rounded" />
-        <h3 class="font-semibold mt-2">${i.name}</h3>
-        <p class="text-indigo-600 font-bold">${i.price}</p>
-        <button class="bg-indigo-600 text-white mt-2 px-3 py-2 rounded w-full">Comprar</button>
-      </div>
-    `).join(" ");
-
-
-    // -------- ABAS --------
-    const tabs = document.querySelectorAll(".tab-btn");
-    tabs.forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.add("hidden"));
-        document.getElementById("tab-" + btn.dataset.tab).classList.remove("hidden");
-      };
-    });
-
-
-    // --- PESQUISA ---
-    document.getElementById("search").addEventListener("input", e => {
-      renderTracks(e.target.value);
-    });
-
-    // Carregar conteúdo inicial
     renderTracks();
   </script>
 </body>
 </html>
+
