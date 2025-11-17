@@ -1,406 +1,104 @@
-<!-- PÁGINA 1 -->
-<!-- file: page1.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 1)</title>
+  <title>SoundMini – Escolha de Músicas</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 1</h1>
-  <div class="space-y-4">
-    <!-- 10 músicas -->
-    <div class="bg-white p-4 rounded shadow">Música 1</div>
-    <div class="bg-white p-4 rounded shadow">Música 2</div>
-    <div class="bg-white p-4 rounded shadow">Música 3</div>
-    <div class="bg-white p-4 rounded shadow">Música 4</div>
-    <div class="bg-white p-4 rounded shadow">Música 5</div>
-    <div class="bg-white p-4 rounded shadow">Música 6</div>
-    <div class="bg-white p-4 rounded shadow">Música 7</div>
-    <div class="bg-white p-4 rounded shadow">Música 8</div>
-    <div class="bg-white p-4 rounded shadow">Música 9</div>
-    <div class="bg-white p-4 rounded shadow">Música 10</div>
-  </div>
+<body class="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen text-gray-900 flex flex-col">
 
-  <div class="mt-6 flex gap-2">
-    <a href="page2.html" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima →</a>
-  </div>
-</body>
-</html>
+  <!-- HEADER LIMPO -->
+  <header class="backdrop-blur bg-white/70 border-b sticky top-0 z-20">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold tracking-tight">SoundMini</h1>
+      <nav class="flex gap-3 text-sm">
+        <a href="#" class="text-gray-500 hover:text-black">Início</a>
+        <a href="#" class="text-gray-500 hover:text-black">Explorar</a>
+        <a href="#" class="text-gray-500 hover:text-black">Upload</a>
+      </nav>
+    </div>
+  </header>
 
+  <!-- TÍTULO DA PÁGINA -->
+  <section class="max-w-5xl mx-auto px-4 py-6">
+    <h2 class="text-xl font-semibold mb-2">Escolha uma música</h2>
+    <p class="text-gray-600 text-sm">Selecione uma das faixas abaixo</p>
+  </section>
 
-<!-- PÁGINA 2 -->
-<!-- file: page2.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 2)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 2</h1>
-  <div class="space-y-4">
-    <div class="bg-white p-4 rounded shadow">Música 11</div>
-    <div class="bg-white p-4 rounded shadow">Música 12</div>
-    <div class="bg-white p-4 rounded shadow">Música 13</div>
-    <div class="bg-white p-4 rounded shadow">Música 14</div>
-    <div class="bg-white p-4 rounded shadow">Música 15</div>
-    <div class="bg-white p-4 rounded shadow">Música 16</div>
-    <div class="bg-white p-4 rounded shadow">Música 17</div>
-    <div class="bg-white p-4 rounded shadow">Música 18</div>
-    <div class="bg-white p-4 rounded shadow">Música 19</div>
-    <div class="bg-white p-4 rounded shadow">Música 20</div>
-  </div>
+  <!-- LISTA DE MÚSICAS → MAIS VIVA E MINIMALISTA -->
+  <main class="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-32" id="track-list">
 
-  <div class="mt-6 flex gap-2">
-    <a href="page1.html" class="px-4 py-2 bg-gray-300 rounded">← Voltar</a>
-    <a href="page3.html" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima →</a>
-  </div>
-</body>
-</html>
-
-
-<!-- PÁGINA 3 -->
-<!-- file: page3.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 3)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 3</h1>
-  <div class="space-y-4">
-    <div class="bg-white p-4 rounded shadow">Música 21</div>
-    <div class="bg-white p-4 rounded shadow">Música 22</div>
-    <div class="bg-white p-4 rounded shadow">Música 23</div>
-    <div class="bg-white p-4 rounded shadow">Música 24</div>
-    <div class="bg-white p-4 rounded shadow">Música 25</div>
-    <div class="bg-white p-4 rounded shadow">Música 26</div>
-    <div class="bg-white p-4 rounded shadow">Música 27</div>
-    <div class="bg-white p-4 rounded shadow">Música 28</div>
-    <div class="bg-white p-4 rounded shadow">Música 29</div>
-    <div class="bg-white p-4 rounded shadow">Música 30</div>
-  </div>
-
-  <div class="mt-6 flex gap-2">
-    <a href="page2.html" class="px-4 py-2 bg-gray-300 rounded">← Voltar</a>
-    <a href="page4.html" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima →</a>
-  </div>
-</body>
-</html>
-
-
-<!-- PÁGINA 4 -->
-<!-- file: page4.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 4)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 4</h1>
-  <div class="space-y-4">
-    <div class="bg-white p-4 rounded shadow">Música 31</div>
-    <div class="bg-white p-4 rounded shadow">Música 32</div>
-    <div class="bg-white p-4 rounded shadow">Música 33</div>
-    <div class="bg-white p-4 rounded shadow">Música 34</div>
-    <div class="bg-white p-4 rounded shadow">Música 35</div>
-    <div class="bg-white p-4 rounded shadow">Música 36</div>
-    <div class="bg-white p-4 rounded shadow">Música 37</div>
-    <div class="bg-white p-4 rounded shadow">Música 38</div>
-    <div class="bg-white p-4 rounded shadow">Música 39</div>
-    <div class="bg-white p-4 rounded shadow">Música 40</div>
-  </div>
-
-  <div class="mt-6 flex gap-2">
-    <a href="page3.html" class="px-4 py-2 bg-gray-300 rounded">← Voltar</a>
-    <a href="page5.html" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima →</a>
-  </div>
-</body>
-</html>
-
-
-<!-- PÁGINA 5 -->
-<!-- file: page5.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 5)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 5</h1>
-  <div class="space-y-4">
-    <div class="bg-white p-4 rounded shadow">Música 41</div>
-    <div class="bg-white p-4 rounded shadow">Música 42</div>
-    <div class="bg-white p-4 rounded shadow">Música 43</div>
-    <div class="bg-white p-4 rounded shadow">Música 44</div>
-    <div class="bg-white p-4 rounded shadow">Música 45</div>
-    <div class="bg-white p-4 rounded shadow">Música 46</div>
-    <div class="bg-white p-4 rounded shadow">Música 47</div>
-    <div class="bg-white p-4 rounded shadow">Música 48</div>
-    <div class="bg-white p-4 rounded shadow">Música 49</div>
-    <div class="bg-white p-4 rounded shadow">Música 50</div>
-  </div>
-
-  <div class="mt-6 flex gap-2">
-    <a href="page4.html" class="px-4 py-2 bg-gray-300 rounded">← Voltar</a>
-    <a href="page6.html" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima →</a>
-  </div>
-</body>
-</html>
-
-
-<!-- PÁGINA 6 -->
-<!-- file: page6.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 6)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 6</h1>
-  <div class="space-y-4">
-    <div class="bg-white p-4 rounded shadow">Música 51</div>
-    <div class="bg-white p-4 rounded shadow">Música 52</div>
-    <div class="bg-white p-4 rounded shadow">Música 53</div>
-    <div class="bg-white p-4 rounded shadow">Música 54</div>
-    <div class="bg-white p-4 rounded shadow">Música 55</div>
-    <div class="bg-white p-4 rounded shadow">Música 56</div>
-    <div class="bg-white p-4 rounded shadow">Música 57</div>
-    <div class="bg-white p-4 rounded shadow">Música 58</div>
-    <div class="bg-white p-4 rounded shadow">Música 59</div>
-    <div class="bg-white p-4 rounded shadow">Música 60</div>
-  </div>
-
-  <div class="mt-6 flex gap-2">
-    <a href="page5.html" class="px-4 py-2 bg-gray-300 rounded">← Voltar</a>
-    <a href="page7.html" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima →</a>
-  </div>
-</body>
-</html>
-
-
-<!-- PÁGINA 7 -->
-<!-- file: page7.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolhas (Página 7)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Escolha de Músicas – Página 7</h1>
-  <div class="space-y-4">
-    <div class="bg-white p-4 rounded shadow">Música 61</div>
-    <div class="bg-white p-4 rounded shadow">Música 62</div>
-    <div class="bg-white p-4 rounded shadow">Música 63</div>
-    <div class="bg-white p-4 rounded shadow">Música 64</div>
-    <div class="bg-white p-4 rounded shadow">Música 65</div>
-    <div class="bg-white p-4 rounded shadow">Música 66</div>
-    <div class="bg-white p-4 rounded shadow">Música 67</div>
-    <div class="bg-white p-4 rounded shadow">Música 68</div>
-    <div class="bg-white p-4 rounded shadow">Música 69</div>
-    <div class="bg-white p-4 rounded shadow">Música 70</div>
-  </div>
-
-  <div class="mt-6 flex gap-2">
-    <a href="page6.html" class="px-4 py-2 bg-gray-300 rounded">← Voltar</a>
-  </div>
-</body>
-</html>
-<!-- PAGE 1 -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Página 1</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Página 1 – Escolha de Músicas</h1>
-
-  <div class="grid grid-cols-1 gap-4" id="music-list-1">
-    <!-- músicas -->
-  </div>
-
-  <script>
-    const musics1 = Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Música ${i + 1}`,
-      artist: `Artista ${i + 1}`,
-      cover: `https://picsum.photos/seed/pag1_${i}/200`,
-      src: "sample.mp3"
-    }));
-
-    document.getElementById("music-list-1").innerHTML = musics1.map(m => `
-      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
-        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
-        <div class='flex-1'>
-          <h3 class='font-semibold'>${m.title}</h3>
-          <p class='text-sm text-gray-500'>${m.artist}</p>
-        </div>
-        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+    <!-- CARD DE MÚSICA -->
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/11/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 01</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
       </div>
-    `).join("");
-  </script>
-</body>
-</html>
+    </div>
 
-
-<!-- PAGE 2 -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Página 2</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Página 2 – Escolha de Músicas</h1>
-
-  <div class="grid grid-cols-1 gap-4" id="music-list-2"></div>
-
-  <script>
-    const musics2 = Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Música ${i + 1}`,
-      artist: `Artista ${i + 1}`,
-      cover: `https://picsum.photos/seed/pag2_${i}/200`,
-      src: "sample.mp3"
-    }));
-
-    document.getElementById("music-list-2").innerHTML = musics2.map(m => `
-      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
-        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
-        <div class='flex-1'>
-          <h3 class='font-semibold'>${m.title}</h3>
-          <p class='text-sm text-gray-500'>${m.artist}</p>
-        </div>
-        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/12/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 02</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
       </div>
-    `).join("");
-  </script>
-</body>
-</html>
+    </div>
 
-
-<!-- PAGE 3 -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Página 3</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Página 3 – Escolha de Músicas</h1>
-
-  <div class="grid grid-cols-1 gap-4" id="music-list-3"></div>
-
-  <script>
-    const musics3 = Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Música ${i + 1}`,
-      artist: `Artista ${i + 1}`,
-      cover: `https://picsum.photos/seed/pag3_${i}/200`,
-      src: "sample.mp3"
-    }));
-
-    document.getElementById("music-list-3").innerHTML = musics3.map(m => `
-      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
-        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
-        <div class='flex-1'>
-          <h3 class='font-semibold'>${m.title}</h3>
-          <p class='text-sm text-gray-500'>${m.artist}</p>
-        </div>
-        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/13/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 03</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
       </div>
-    `).join("");
-  </script>
-</body>
-</html>
+    </div>
 
-
-<!-- PAGE 4 -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Página 4</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Página 4 – Escolha de Músicas</h1>
-
-  <div class="grid grid-cols-1 gap-4" id="music-list-4"></div>
-
-  <script>
-    const musics4 = Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Música ${i + 1}`,
-      artist: `Artista ${i + 1}`,
-      cover: `https://picsum.photos/seed/pag4_${i}/200`,
-      src: "sample.mp3"
-    }));
-
-    document.getElementById("music-list-4").innerHTML = musics4.map(m => `
-      <div class='bg-white p-4 rounded shadow flex items-center gap-4'>
-        <img src='${m.cover}' class='w-16 h-16 rounded object-cover'>
-        <div class='flex-1'>
-          <h3 class='font-semibold'>${m.title}</h3>
-          <p class='text-sm text-gray-500'>${m.artist}</p>
-        </div>
-        <button class='bg-indigo-600 text-white px-3 py-2 rounded'>Tocar</button>
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/14/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 04</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
       </div>
-    `).join("");
-  </script>
+    </div>
+
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/15/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 05</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
+      </div>
+    </div>
+
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/16/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 06</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
+      </div>
+    </div>
+
+    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="https://picsum.photos/seed/17/500" class="h-40 w-full object-cover" />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">Faixa 07</h3>
+        <p class="text-sm text-gray-500">Artista Desconhecido</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- NAVEGAÇÃO ENTRE PÁGINAS -->
+  <footer class="py-6 text-center text-gray-600 text-sm">
+    <div class="flex justify-center gap-2">
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">1</a>
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">2</a>
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">3</a>
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">4</a>
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">5</a>
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">6</a>
+      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">7</a>
+    </div>
+  </footer>
+
 </body>
 </html>
-
-
-<!-- PAGE 5 -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Página 5</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-4">Página 5 – Escolha de Músicas</h1>
-
-  <div class="grid grid-cols-1 gap-4" id="music-list-5"></div>
-
-  <script>
-    const musics5 = Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      title: `Música ${i + 1}`,
-      artist: `Artista ${i + 1}`,
-      cover: `https://picsum.photos/seed/pag5_${i}/200`,
-      src: "sample.mp3"
-    }));
-
-    document.getElementById("music-list-5").innerHTML = musics5.map
