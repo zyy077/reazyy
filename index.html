@@ -20,7 +20,7 @@
   </header>
 
 
-  <!-- LISTA DE ESCOLHA -->
+  <!-- LISTA -->
   <section class="max-w-6xl mx-auto px-4 py-6">
     <h2 class="text-xl font-semibold mb-4">Escolha sua música</h2>
 
@@ -28,7 +28,7 @@
   </section>
 
 
-  <!-- PAGINAÇÃO -->
+  <!-- PAGINAS -->
   <section class="pb-36">
     <div class="flex justify-center gap-2">
       <button onclick="goPage(1)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">1</button>
@@ -74,11 +74,11 @@
     let currentTrack = null;
     let currentPage = 1;
 
-    // 🔥 7 primeiras músicas com nome alterado
+    // 🔥 7 primeiras músicas com title = mentaliizi - RIT7MIZYY e artist = mentaliizi
     const allTracks = Array.from({ length: 70 }).map((_, i) => ({
       id: i + 1,
-      title: i < 7 ? "mentaliizi – RIT7MIZYY" : `Música ${i + 1}`,
-      artist: "Artista Desconhecido",
+      title: i < 7 ? "mentaliizi - RIT7MIZYY" : `Música ${i + 1}`,
+      artist: i < 7 ? "mentaliizi" : "Artista Desconhecido",
       cover: `https://picsum.photos/seed/music${i + 1}/300`,
       src: "sample1.mp3"
     }));
