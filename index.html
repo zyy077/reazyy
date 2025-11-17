@@ -3,102 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Escolha de Músicas</title>
+  <title>SoundMini – Biblioteca de Músicas</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen text-gray-900 flex flex-col">
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
 
-  <!-- HEADER LIMPO -->
-  <header class="backdrop-blur bg-white/70 border-b sticky top-0 z-20">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold tracking-tight">SoundMini</h1>
-      <nav class="flex gap-3 text-sm">
-        <a href="#" class="text-gray-500 hover:text-black">Início</a>
-        <a href="#" class="text-gray-500 hover:text-black">Explorar</a>
-        <a href="#" class="text-gray-500 hover:text-black">Upload</a>
-      </nav>
+  <!-- HEADER -->
+  <header class="bg-white shadow-sm sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-xl font-bold">SoundMini</h1>
+
+      <input id="search" placeholder="Buscar músicas..." class="border px-3 py-2 rounded w-64" />
+
+      <button class="bg-indigo-600 text-white px-3 py-2 rounded">Upload</button>
     </div>
   </header>
 
-  <!-- TÍTULO DA PÁGINA -->
-  <section class="max-w-5xl mx-auto px-4 py-6">
-    <h2 class="text-xl font-semibold mb-2">Escolha uma música</h2>
-    <p class="text-gray-600 text-sm">Selecione uma das faixas abaixo</p>
+
+  <!-- LISTA DE ESCOLHA (1–10 MÚSICAS EM CARDS) -->
+  <section class="max-w-6xl mx-auto px-4 py-6">
+    <h2 class="text-xl font-semibold mb-4">Escolha sua música</h2>
+
+    <div id="card-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- LISTA DE MÚSICAS → MAIS VIVA E MINIMALISTA -->
-  <main class="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-32" id="track-list">
 
-    <!-- CARD DE MÚSICA -->
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/11/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 01</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/12/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 02</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/13/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 03</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/14/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 04</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/15/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 05</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/16/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 06</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-
-    <div class="bg-white/80 backdrop-blur shadow-sm rounded-xl overflow-hidden hover:shadow-md transition cursor-pointer">
-      <img src="https://picsum.photos/seed/17/500" class="h-40 w-full object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg">Faixa 07</h3>
-        <p class="text-sm text-gray-500">Artista Desconhecido</p>
-      </div>
-    </div>
-  </main>
-
-  <!-- NAVEGAÇÃO ENTRE PÁGINAS -->
-  <footer class="py-6 text-center text-gray-600 text-sm">
+  <!-- PAGINAÇÃO (7 PÁGINAS) -->
+  <section class="pb-36">
     <div class="flex justify-center gap-2">
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">1</a>
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">2</a>
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">3</a>
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">4</a>
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">5</a>
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">6</a>
-      <a class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100" href="#">7</a>
+      <button onclick="goPage(1)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">1</button>
+      <button onclick="goPage(2)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">2</button>
+      <button onclick="goPage(3)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">3</button>
+      <button onclick="goPage(4)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">4</button>
+      <button onclick="goPage(5)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">5</button>
+      <button onclick="goPage(6)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">6</button>
+      <button onclick="goPage(7)" class="px-3 py-1 bg-white shadow rounded hover:bg-gray-100">7</button>
+    </div>
+  </section>
+
+
+  <!-- PLAYER FIXO -->
+  <footer class="fixed bottom-0 left-0 right-0 bg-white border-t shadow">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+
+      <div id="player-info" class="flex items-center gap-3 w-64">
+        <span class="text-gray-500 text-sm">Nenhuma faixa selecionada</span>
+      </div>
+
+      <div class="flex-1">
+        <div class="bg-gray-200 h-2 rounded overflow-hidden">
+          <div id="progress-bar" class="bg-indigo-600 h-2 w-0"></div>
+        </div>
+      </div>
+
+      <button id="play-btn" class="px-4 py-2 bg-gray-200 rounded">Tocar</button>
+
+      <audio id="audio"></audio>
     </div>
   </footer>
+
+
+  <!-- SCRIPT -->
+  <script>
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("play-btn");
+    const playerInfo = document.getElementById("player-info");
+    const progressBar = document.getElementById("progress-bar");
+    const cardList = document.getElementById("card-list");
+    let currentTrack = null;
+    let currentPage = 1;
+
+    const allTracks = Array.from({ length: 70 }).map((_, i) => ({
+      id: i + 1,
+      title: `Música ${i + 1}`,
+      artist: "Artista Desconhecido",
+      cover: `https://picsum.photos/seed/music${i + 1}/300`,
+      src: "sample1.mp3"
+    }));
+
+    function renderPage(num) {
+      currentPage = num;
+      const start = (num - 1) * 10;
+      const end = num * 10;
+      const items = allTracks.slice(start, end);
+
+      cardList.innerHTML = items.map(m => `
+        <div onclick="playTrack(${m.id})" class="bg-white p-4 rounded shadow hover:shadow-lg cursor-pointer transition overflow-hidden">
+          <img src="${m.cover}" class="w-full h-40 object-cover rounded mb-3" />
+          <h3 class="font-semibold text-lg">${m.title}</h3>
+          <p class="text-sm text-gray-500">${m.artist}</p>
+        </div>
+      `).join("");
+    }
+
+    function goPage(num) {
+      renderPage(num);
+    }
+
+    function playTrack(id) {
+      const track = allTracks.find(t => t.id === id);
+      if (!track) return;
+
+      currentTrack = track;
+      audio.src = track.src;
+      audio.play();
+      playBtn.textContent = "Pausar";
+
+      playerInfo.innerHTML = `
+        <img src="${track.cover}" class="w-12 h-12 rounded object-cover" />
+        <div>
+          <p class="font-medium text-sm">${track.title}</p>
+          <p class="text-xs text-gray-500">${track.artist}</p>
+        </div>
+      `;
+    }
+
+    playBtn.onclick = () => {
+      if (!audio.src) return;
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "Pausar";
+      } else {
+        audio.pause();
+        playBtn.textContent = "Tocar";
+      }
+    };
+
+    audio.ontimeupdate = () => {
+      if (!audio.duration) return;
+      progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+    };
+
+
+    // BUSCAR EM NOVA ABA
+    document.getElementById("search").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const q = e.target.value.trim();
+        if (q.length > 0) window.open(`search.html?q=${encodeURIComponent(q)}`, "_blank");
+      }
+    });
+
+    renderPage(1);
+  </script>
 
 </body>
 </html>
