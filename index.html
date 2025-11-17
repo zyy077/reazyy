@@ -1,143 +1,206 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Clone do SoundCloud</title>
+/*
+SoundCloud-like single-file React app (starter UI)
+Place in a Vite + React + Tailwind project (src/App.jsx).
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
-  <!-- HEADER -->
-  <header class="bg-white shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-      <h1 class="text-xl font-bold">SoundMini</h1>
+What this file includes:
+- Header with search and upload button
+- Feed of audio cards with play/pause, likes, comments (local state)
+- Bottom compact player showing current track progress
+- Mock data; replace with API calls to your backend
 
-      <input id="search" placeholder="Buscar músicas..." class="border px-3 py-2 rounded w-64" />
+How to run (quick):
+1. npm create vite@latest myapp -- --template react
+2. cd myapp
+3. npm install
+4. Install Tailwind (follow Tailwind docs for Vite)
+5. Replace src/App.jsx with this file, add sample audio files in public/ or update URLs
+6. npm run dev
 
-      <button class="bg-indigo-600 text-white px-3 py-2 rounded">Upload</button>
-    </div>
-  </header>
+This is a front-end starter. I can also provide a Node/Express + PostgreSQL + S3 backend if you want.
+*/
 
+import React, { useState, useRef, useEffect } from 'react';
 
-  <!-- FEED -->
-  <main class="flex-1 max-w-5xl mx-auto px-4 py-6 space-y-4" id="track-list">
-    <!-- As faixas serão carregadas via JS -->
-  </main>
+export default function App() {
+  const [tracks, setTracks] = useState(sampleTracks());
+  const [query, setQuery] = useState('');
+  const [current, setCurrent] = useState(null);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const onTime = () => setProgress((audio.currentTime / audio.duration) || 0);
+    audio.addEventListener('timeupdate', onTime);
+    audio.addEventListener('ended', () => { setIsPlaying(false); setProgress(0); });
+    return () => {
+      audio.removeEventListener('timeupdate', onTime);
+      audio.removeEventListener('ended', () => {});
+    };
+  }, [current]);
 
-  <!-- PLAYER FIXO EMBAIXO -->
-  <footer class="fixed bottom-0 left-0 right-0 bg-white border-t shadow">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center gap-4">
+  function playTrack(track) {
+    if (current && current.id === track.id) {
+      // toggle
+      if (isPlaying) { audioRef.current.pause(); setIsPlaying(false); }
+      else { audioRef.current.play(); setIsPlaying(true); }
+      return;
+    }
+    setCurrent(track);
+    setTimeout(() => {
+      if (audioRef.current) { audioRef.current.play(); setIsPlaying(true); }
+    }, 50);
+  }
 
-      <!-- Cover + info -->
-      <div id="player-info" class="flex items-center gap-3 w-64">
-        <span class="text-gray-500 text-sm">Nenhuma faixa selecionada</span>
-      </div>
+  function likeTrack(id) {
+    setTracks(t => t.map(x => x.id===id ? {...x, likes: x.likes+1, liked:true} : x));
+  }
 
-      <!-- Barra de progresso -->
-      <div class="flex-1">
-        <div class="bg-gray-200 h-2 rounded overflow-hidden">
-          <div id="progress-bar" class="bg-indigo-600 h-2 w-0"></div>
+  function addComment(id, text) {
+    if (!text) return;
+    setTracks(t => t.map(x => x.id===id ? {...x, comments: [...x.comments, {id:Date.now(), text}]} : x));
+  }
+
+  const filtered = tracks.filter(t => t.title.toLowerCase().includes(query.toLowerCase()) || t.artist.toLowerCase().includes(query.toLowerCase()));
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      <header className="bg-white shadow-sm">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="text-xl font-bold">SoundMini</div>
+            <nav className="hidden sm:flex gap-3 text-sm text-gray-600">
+              <button className="hover:underline">Discover</button>
+              <button className="hover:underline">Tracks</button>
+              <button className="hover:underline">Activity</button>
+            </nav>
+          </div>
+          <div className="flex items-center gap-3">
+            <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Buscar faixas, artistas..." className="border rounded px-3 py-2 text-sm w-64" />
+            <button className="bg-indigo-600 text-white px-3 py-2 rounded">Upload</button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <!-- Botão play/pause -->
-      <button id="play-btn" class="px-4 py-2 bg-gray-200 rounded">Tocar</button>
+      <main className="max-w-4xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="md:col-span-2">
+          <div className="space-y-4">
+            {filtered.map(track => (
+              <article key={track.id} className="bg-white p-4 rounded shadow-sm flex gap-4">
+                <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center"> 
+                  <img src={track.cover} alt="cover" className="w-full h-full object-cover rounded" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-semibold">{track.title}</h3>
+                      <p className="text-xs text-gray-500">{track.artist} • {formatDuration(track.duration)}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={()=>likeTrack(track.id)} className={"text-sm px-2 py-1 rounded " + (track.liked ? 'bg-red-100 text-red-600' : 'bg-gray-100')}>❤ {track.likes}</button>
+                      <button onClick={()=>playTrack(track)} className="px-3 py-1 bg-indigo-600 text-white rounded text-sm">{current && current.id === track.id && isPlaying ? 'Pausar' : 'Tocar'}</button>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-700">{track.description}</p>
 
-      <audio id="audio"></audio>
-    </div>
-  </footer>
+                  <div className="mt-3">
+                    <CommentsList comments={track.comments} onAdd={(text)=>addComment(track.id, text)} />
+                  </div>
+                </div>
+              </article>
+            ))}
+            {filtered.length===0 && <div className="text-center text-gray-500 p-6 bg-white rounded">Nenhuma faixa encontrada.</div>}
+          </div>
+        </section>
 
-
-  <!-- SCRIPT PRINCIPAL -->
-  <script>
-    const audio = document.getElementById("audio");
-    const playBtn = document.getElementById("play-btn");
-    const trackList = document.getElementById("track-list");
-    const playerInfo = document.getElementById("player-info");
-    const progressBar = document.getElementById("progress-bar");
-
-    let currentTrack = null;
-
-    const tracks = [
-      {
-        id: 1,
-        title: "Morning Drive",
-        artist: "DJ Sol",
-        cover: "https://picsum.photos/seed/1/200",
-        src: "sample1.mp3"
-      },
-      {
-        id: 2,
-        title: "Late Night",
-        artist: "Ana Maria",
-        cover: "https://picsum.photos/seed/2/200",
-        src: "sample2.mp3"
-      },
-      {
-        id: 3,
-        title: "Upbeat Pop",
-        artist: "The Waves",
-        cover: "https://picsum.photos/seed/3/200",
-        src: "sample3.mp3"
-      }
-    ];
-
-    function renderTracks() {
-      trackList.innerHTML = tracks.map(t => `
-        <div class="bg-white p-4 rounded shadow flex items-center gap-4">
-          <img src="${t.cover}" class="w-16 h-16 rounded object-cover" />
-
-          <div class="flex-1">
-            <h3 class="font-semibold">${t.title}</h3>
-            <p class="text-sm text-gray-500">${t.artist}</p>
+        <aside className="hidden md:block">
+          <div className="bg-white p-4 rounded shadow-sm">
+            <h4 className="font-semibold mb-3">Artistas em tendência</h4>
+            <ul className="space-y-2 text-sm text-gray-700">
+              {tracks.slice(0,6).map(t => (
+                <li key={t.id} className="flex items-center gap-3">
+                  <img src={t.cover} alt="c" className="w-10 h-10 rounded object-cover" />
+                  <div>
+                    <div className="font-medium">{t.artist}</div>
+                    <div className="text-xs text-gray-500">{t.title}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <button onclick="playTrack(${t.id})" class="bg-indigo-600 text-white px-3 py-2 rounded">
-            Tocar
-          </button>
+          <div className="mt-4 bg-white p-4 rounded shadow-sm text-sm text-gray-700">
+            <div className="font-semibold mb-2">Sobre</div>
+            <p>Protótipo front-end de um clone do SoundCloud. Use como base para integrar com backend, autenticação e armazenamento de arquivos.</p>
+          </div>
+        </aside>
+      </main>
+
+      <footer className="fixed bottom-0 left-0 right-0 bg-white border-t">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-4">
+          <div className="w-20">
+            {current ? (
+              <div className="flex items-center gap-3">
+                <img src={current.cover} alt="c" className="w-12 h-12 rounded object-cover" />
+                <div className="text-sm">
+                  <div className="font-medium">{current.title}</div>
+                  <div className="text-xs text-gray-500">{current.artist}</div>
+                </div>
+              </div>
+            ) : (
+              <div className="text-sm text-gray-500">Nenhuma faixa selecionada</div>
+            )}
+          </div>
+
+          <div className="flex-1">
+            <div className="mx-4">
+              <div className="bg-gray-200 rounded h-2 overflow-hidden">
+                <div style={{width: `${progress*100}%`}} className="h-2 bg-indigo-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button onClick={()=>{ if(audioRef.current){ if(isPlaying){ audioRef.current.pause(); setIsPlaying(false);} else { audioRef.current.play(); setIsPlaying(true);} } }} className="px-3 py-2 bg-gray-100 rounded">{isPlaying ? 'Pausar' : 'Tocar'}</button>
+            <audio ref={audioRef} src={current ? current.src : ''} preload="metadata" />
+          </div>
         </div>
-      `).join("");
-    }
+      </footer>
+    </div>
+  );
+}
 
-    function playTrack(id) {
-      const track = tracks.find(t => t.id === id);
-      if (!track) return;
-      currentTrack = track;
+function CommentsList({comments, onAdd}){
+  const [val, setVal] = useState('');
+  return (
+    <div className="mt-2">
+      <div className="space-y-2">
+        {comments.map(c => (
+          <div key={c.id} className="text-sm text-gray-700">• {c.text}</div>
+        ))}
+      </div>
+      <div className="flex gap-2 mt-2">
+        <input value={val} onChange={e=>setVal(e.target.value)} placeholder="Comentar..." className="flex-1 border rounded px-2 py-1 text-sm" />
+        <button onClick={()=>{ onAdd(val); setVal(''); }} className="px-3 py-1 bg-indigo-600 text-white rounded text-sm">OK</button>
+      </div>
+    </div>
+  );
+}
 
-      audio.src = track.src;
-      audio.play();
-      playBtn.textContent = "Pausar";
+function formatDuration(sec){
+  if(!sec) return '0:00';
+  const m = Math.floor(sec/60);
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
 
-      playerInfo.innerHTML = `
-        <img src="${track.cover}" class="w-12 h-12 rounded object-cover" />
-        <div>
-          <p class="font-medium text-sm">${track.title}</p>
-          <p class="text-xs text-gray-500">${track.artist}</p>
-        </div>
-      `;
-    }
-
-    playBtn.onclick = () => {
-      if (!audio.src) return;
-      if (audio.paused) {
-        audio.play();
-        playBtn.textContent = "Pausar";
-      } else {
-        audio.pause();
-        playBtn.textContent = "Tocar";
-      }
-    };
-
-    audio.ontimeupdate = () => {
-      if (!audio.duration) return;
-      const percent = (audio.currentTime / audio.duration) * 100;
-      progressBar.style.width = percent + "%";
-    };
-
-    renderTracks();
-  </script>
-</body>
-</html>
+function sampleTracks(){
+  // Replace src with real URLs or /public files
+  return [
+    { id:1, title:'Morning Drive', artist:'DJ Sol', duration: 142, likes:12, liked:false, cover:'https://picsum.photos/seed/1/200', src:'/sample1.mp3', description:'Beats for cruising.', comments:[{id:11,text:'Boa vibe'},{id:12,text:'Curti demais'}]},
+    { id:2, title:'Late Night', artist:'Ana Maria', duration: 198, likes:34, liked:false, cover:'https://picsum.photos/seed/2/200', src:'/sample2.mp3', description:'Lo-fi chill.', comments:[]},
+    { id:3, title:'Upbeat Pop', artist:'The Waves', duration: 210, likes:5, liked:false, cover:'https://picsum.photos/seed/3/200', src:'/sample3.mp3', description:'Energetic track.', comments:[{id:21,text:'Refrão grudento!'}]},
+  ];
+}
