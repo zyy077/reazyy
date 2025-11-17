@@ -3,180 +3,251 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundMini – Biblioteca Azul</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Mentex — Projetos e Grupos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: #f9f9f9; }
+
+    /* HEADER estilo YouTube */
+    header {
+      width: 100%;
+      height: 56px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      border-bottom: 1px solid #ddd;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .logo { font-size: 20px; font-weight: bold; color: #cc0000; }
+
+    .search-box {
+      display: flex;
+      width: 50%;
+      max-width: 600px;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      width: 60px;
+      background: #f0f0f0;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      bottom: 0;
+      border-right: 1px solid #ddd;
+      padding-top: 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      color: #111;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .sidebar a:hover { background: #f0f0f0; }
+
+    /* CONTEÚDO PRINCIPAL */
+    main {
+      margin-left: 240px;
+      padding: 80px 30px;
+    }
+
+    .title-section { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+
+    /* CARDS DE GRUPOS */
+    .groups-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .group-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .group-card h3 { margin-bottom: 10px; }
+    .group-card p { color: #444; }
+
+    .create-btn {
+      background: #cc0000;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(3px);
+      background: rgba(0,0,0,0.3);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-box {
+      width: 350px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .modal-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-box button {
+      width: 100%;
+      padding: 10px;
+      background: #cc0000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+<body>
 
-<body class="bg-[#f0f5ff] text-gray-900 min-h-screen flex flex-col">
+  <!-- HEADER estilo YouTube -->
+  <header>
+    <div class="logo">Mentex</div>
 
-  <!-- NAVBAR ESTILO INSTAGRAM -->
-  <header class="bg-white border-b sticky top-0 z-20">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-
-      <h1 class="text-2xl font-bold text-blue-600 tracking-tight">
-        SoundMini
-      </h1>
-
-      <input
-        id="search"
-        placeholder="Buscar músicas..."
-        class="border border-blue-300 px-3 py-2 rounded-lg w-64 focus:ring focus:ring-blue-200 outline-none transition"
-      />
-
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
-        Upload
-      </button>
-
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Pesquisar projetos ou grupos..." />
+      <button onclick="search()">🔍</button>
     </div>
+
+    <div>👤 Login</div>
   </header>
 
+  <!-- MENU LATERAL -->
+  <div class="sidebar">
+    <a href="#">Início</a>
+    <a href="#">Meus Projetos</a>
+    <a href="#">Meus Grupos</a>
+    <a href="#">Configurações</a>
+  </div>
 
-  <!-- LISTA DE CARTÕES -->
-  <section class="max-w-6xl mx-auto px-4 py-6">
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <h1 class="title-section">Grupos de Criação</h1>
 
-    <h2 class="text-xl font-semibold text-blue-700 mb-4">
-      Escolha sua música
-    </h2>
+    <button class="create-btn" onclick="openModal()">+ Criar Novo Grupo</button>
 
-    <div id="card-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-  </section>
+    <div class="groups-container" id="groups"></div>
+  </main>
 
-
-  <!-- PAGINAS -->
-  <section class="pb-36">
-    <div class="flex justify-center gap-2">
-      <button onclick="goPage(1)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">1</button>
-      <button onclick="goPage(2)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">2</button>
-      <button onclick="goPage(3)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">3</button>
-      <button onclick="goPage(4)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">4</button>
-      <button onclick="goPage(5)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">5</button>
-      <button onclick="goPage(6)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">6</button>
-      <button onclick="goPage(7)" class="px-4 py-2 bg-white text-blue-600 border border-blue-300 rounded-full hover:bg-blue-100">7</button>
+  <!-- MODAL PARA CRIAR GRUPO -->
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <h2>Criar Grupo</h2>
+      <input type="text" id="groupName" placeholder="Nome do grupo" />
+      <input type="text" id="groupDesc" placeholder="Descrição" />
+      <button onclick="createGroup()">Criar</button>
     </div>
-  </section>
+  </div>
 
-
-  <!-- PLAYER AZUL FIXO -->
-  <footer class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
-
-      <div id="player-info" class="flex items-center gap-3 w-64">
-        <span class="text-gray-500 text-sm">Nenhuma faixa selecionada</span>
-      </div>
-
-      <div class="flex-1">
-        <div class="bg-blue-100 h-2 rounded-full overflow-hidden">
-          <div id="progress-bar" class="bg-blue-600 h-2 w-0"></div>
-        </div>
-      </div>
-
-      <button id="play-btn" class="px-5 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-700 transition">
-        Tocar
-      </button>
-
-      <audio id="audio"></audio>
-    </div>
-  </footer>
-
-
-  <!-- SCRIPT -->
   <script>
-    const audio = document.getElementById("audio");
-    const playBtn = document.getElementById("play-btn");
-    const playerInfo = document.getElementById("player-info");
-    const progressBar = document.getElementById("progress-bar");
-    const cardList = document.getElementById("card-list");
+    const groups = [];
 
-    let currentTrack = null;
-    let currentPage = 1;
-
-    // 🎧 7 primeiras músicas especiais
-    const allTracks = Array.from({ length: 70 }).map((_, i) => ({
-      id: i + 1,
-      title: i < 7 ? "mentaliizi - RIT7MIZYY" : `Música ${i + 1}`,
-      artist: i < 7 ? "mentaliizi" : "Artista Desconhecido",
-      cover: `https://picsum.photos/seed/music${i + 1}/400/400`,
-      src: "sample1.mp3"
-    }));
-
-
-    function renderPage(num) {
-      const start = (num - 1) * 10;
-      const items = allTracks.slice(start, start + 10);
-
-      cardList.innerHTML = items
-        .map(
-          m => `
-        <div onclick="playTrack(${m.id})"
-          class="bg-white rounded-xl shadow hover:shadow-lg cursor-pointer transition p-3 border border-blue-100">
-
-          <img src="${m.cover}"
-            class="w-full h-56 object-cover rounded-xl mb-3 shadow" />
-
-          <h3 class="font-semibold text-lg text-blue-700">${m.title}</h3>
-          <p class="text-sm text-blue-500">${m.artist}</p>
-        </div>
-      `
-        ).join("");
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
     }
 
-
-    function goPage(num) {
-      currentPage = num;
-      renderPage(num);
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
     }
 
-
-    function playTrack(id) {
-      const track = allTracks.find(t => t.id === id);
-      if (!track) return;
-
-      currentTrack = track;
-      audio.src = track.src;
-      audio.play();
-      playBtn.textContent = "Pausar";
-
-      playerInfo.innerHTML = `
-        <img src="${track.cover}" class="w-12 h-12 rounded-lg object-cover shadow" />
-        <div>
-          <p class="font-medium text-sm text-blue-700">${track.title}</p>
-          <p class="text-xs text-blue-500">${track.artist}</p>
-        </div>
-      `;
+    window.onclick = function(e) {
+      if (e.target === document.getElementById("modal")) closeModal();
     }
 
+    function createGroup() {
+      const name = document.getElementById("groupName").value;
+      const desc = document.getElementById("groupDesc").value;
 
-    playBtn.onclick = () => {
-      if (!audio.src) return;
+      if (!name) return alert("Digite um nome para o grupo!");
 
-      if (audio.paused) {
-        audio.play();
-        playBtn.textContent = "Pausar";
-      } else {
-        audio.pause();
-        playBtn.textContent = "Tocar";
-      }
-    };
+      groups.push({ name, desc });
+      renderGroups();
+      closeModal();
+    }
 
+    function renderGroups() {
+      const container = document.getElementById("groups");
+      container.innerHTML = "";
 
-    audio.ontimeupdate = () => {
-      if (!audio.duration) return;
+      groups.forEach(g => {
+        container.innerHTML += `
+          <div class="group-card">
+            <h3>${g.name}</h3>
+            <p>${g.desc}</p>
+          </div>
+        `;
+      });
+    }
 
-      progressBar.style.width =
-        (audio.currentTime / audio.duration) * 100 + "%";
-    };
+    function search() {
+      const term = document.getElementById("searchInput").value.toLowerCase();
 
+      const container = document.getElementById("groups");
+      container.innerHTML = "";
 
-    // 🔍 Buscar em nova aba
-    document.getElementById("search").addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        const q = e.target.value.trim();
-        if (q.length > 0)
-          window.open(`search.html?q=${encodeURIComponent(q)}`, "_blank");
-      }
-    });
-
-    renderPage(1);
+      groups
+        .filter(g => g.name.toLowerCase().includes(term))
+        .forEach(g => {
+          container.innerHTML += `
+            <div class="group-card">
+              <h3>${g.name}</h3>
+              <p>${g.desc}</p>
+            </div>
+          `;
+        });
+    }
   </script>
 
 </body>
